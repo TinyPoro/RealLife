@@ -24,7 +24,20 @@ class Event extends Model
 
     public function getPictureAttribute(){
         if(!$this->img) return '';
-        return config('app.url')."img/".$this->img;
+        return config('app.url')."/img/".$this->img;
+    }
+
+    public function getTopOptionAttribute(){
+        $top_option = null;
+
+        foreach($this->options as $option){
+            if(is_null($top_option)) $top_option = $option;
+            else{
+                if($option->vote > $top_option->vote) $top_option = $option;
+            }
+        }
+
+        return $top_option;
     }
 
     public function options(){

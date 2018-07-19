@@ -26,6 +26,10 @@
                     <div class="pull-left"><a href="#" class="prevnext last"><i class="fa fa-angle-right"></i></a></div>
                     <div class="clearfix"></div>
                 </div>
+
+                <span id="create-box">
+                    <a href="{{route('event.create')}}" class="btn btn-primary">Thêm sự kiện</a>
+                </span>
             </div>
         </div>
 
@@ -48,8 +52,13 @@
                                     </div>
                                 </div>
                                 <div class="posttext pull-left">
-                                    <h2><a href="">{{$event->title}}</a></h2>
+                                    <h2><a href="{{route('event.show', $event->id)}}">{{$event->title}}</a></h2>
                                     <p>{{$event->description}}</p>
+                                    <br/>
+
+                                    @if($event->top_option !== null)
+                                    <p>{{$event->top_option->content}} ({{$event->top_option->vote}} votes)</p>
+                                    @endif
                                 </div>
                                 <div class="clearfix"></div>
                             </div>

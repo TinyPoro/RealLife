@@ -9,6 +9,7 @@
         <link href="{{url('css/font-awesome.min.css')}}" rel="stylesheet">
         <link href="{{url('css/summernote.css')}}" rel="stylesheet">
         <link href="{{url('css/select2.css')}}" rel="stylesheet">
+        <link href="{{url('css/nbs.css')}}" rel="stylesheet">
         @yield('after-css')
     </head>
     <body>

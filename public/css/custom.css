@@ -79,6 +79,13 @@ ul.socialicons li a:hover {
 
 }
 
+#create-box{
+    float: right;
+    position: relative;
+    top: 1rem;
+    right: 4rem;
+}
+
 
 /*-----------------------------------------------------------------*/
 /*--- Header ---*/

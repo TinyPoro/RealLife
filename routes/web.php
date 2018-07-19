@@ -14,5 +14,12 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
+Route::get('/', function(){
+    return redirect('/event');
+});
 Route::resource('event','EventController');
+
+Route::get('/info/{id}', 'EventController@getInfo');
+
+Route::post('/vote', 'EventController@vote');
