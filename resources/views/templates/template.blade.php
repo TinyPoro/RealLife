@@ -7,10 +7,10 @@
 
         @yield('before-css')
         <link rel="stylesheet" href="{{url('css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{url('css/custom.css')}}">
         <link href="{{url('css/font-awesome.min.css')}}" rel="stylesheet">
         <link href="{{url('css/summernote.css')}}" rel="stylesheet">
         <link href="{{url('css/select2.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{url('css/custom.css')}}">
         @yield('after-css')
     </head>
     <body>

@@ -12,13 +12,12 @@
 */
 
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
 Route::get('/', function(){
-    return redirect('/event');
+    return redirect('/event/create');
 });
 Route::resource('event','EventController');
+
+Route::get('/complete/{id}', 'EventController@complete')->name('event.complete');
 
 Route::get('/info/{id}', 'EventController@getInfo');
 

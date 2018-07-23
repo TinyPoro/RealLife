@@ -51,13 +51,17 @@ class EventController extends Controller
             }
         }
 
-        return redirect()->route('event.index');
+        return redirect()->route('event.complete', ['id' => $event->id]);
+    }
+
+    public function complete($id){
+        return view('complete', ['id' => $id]);
     }
 
     public function show($id){
         $event = Event::with('options')->find($id);
 
-        return view('vote', ['event' => $event]);
+        return view('show1', ['event' => $event]);
     }
 
     public function getInfo($id){
