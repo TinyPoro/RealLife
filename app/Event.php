@@ -43,4 +43,8 @@ class Event extends Model
     public function options(){
         return $this->hasMany('App\Option');
     }
+
+    public function users(){
+        return $this->hasMany('App\User');
+    }
 }

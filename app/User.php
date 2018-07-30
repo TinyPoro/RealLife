@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function event()
+    {
+        return $this->belongsTo('App\Event');
+    }
+
+    public function options()
+    {
+        return $this->belongsToMany('App\Option');
+    }
 }

@@ -57,7 +57,7 @@
 @endsection
 
 @section('content')
-    <div id="d-participationPage" style="max-width: 900px;">
+    <div id="d-participationPage">
         <div class="d-pageContent">
             <div class="d-mainContentContainer">
                 <div class="d-mainContentInnerContainer">
@@ -68,6 +68,7 @@
                                     <div>
                                         <div class="d-contentContainer">
                                             <div class="d-content">{{$event->title}}</div>
+                                            <input type="hidden" value="{{$event->id}}" id="event_id">
                                         </div>
                                     </div>
                                 </div>
@@ -90,125 +91,39 @@
 
                                                             </div>
                                                             <div class="d-participantCountHeader">
-                                                                <span>{{count($event->options)}} participants</span>
+                                                                <span><b>{{count($event->users)}}</b> người tham gia</span>
                                                             </div>
                                                         </div>
                                                         <div class="d-newParticipant">
-                                                            <div class="d-participantExtrasAvatar">
-                                                                <div class="d-participantAvatar">
-                                                                    <svg>
-                                                                        <use xlink:href="/dist/44b104ab2d1b941ead6aba5de843eb17.svg#ic_account_circle"></use>
-                                                                    </svg>
-                                                                </div>
-
-                                                            </div>
                                                             <div class="d-participantInfo">
                                                                 <div class="d-formField d-forceSolidBackground d-withText">
                                                                     <div class="d-fieldContainer">
 
                                                                         <div class="d-inputContainer">
-
-                                                                            <input type="text" value="ádasd" id="" placeholder="Enter your name" required="required" maxlength="64">
-
-
+                                                                            <input type="text" id="" placeholder="Enter your name" required="required" maxlength="64">
                                                                         </div>
                                                                     </div>
 
                                                                 </div></div>
                                                             <div class="d-participantExtrasEditButton">
 
-                                                            </div>                        </div>
+                                                            </div>
+                                                        </div>
                                                     </header>
                                                     <ul class="d-participants">
-                                                        <li class="d-participant
-                   d-lastSavedParticipant
-                  " data-participant-id="224514269">
-                                                            <div class="d-participantExtrasAvatar">
-                                                                <div class="d-participantAvatar">
-                                                                    <svg>
-                                                                        <use xlink:href="/dist/44b104ab2d1b941ead6aba5de843eb17.svg#ic_account_circle"></use>
-                                                                    </svg>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="d-participantInfo">
-                                                                <div class="d-text">
-                                                                    ádasd
-                                                                </div>
-                                                                <div class="d-detailText">
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="d-participantExtrasEditButton">
-                                                                <button type="button" id="false" class="d-button d-editParticipantButton d-medium d-silentButton">
-                                                                    <div class="d-buttonContainer">
-                                                                        <div class="d-buttonContent">
-                                                                            <div class="d-icon">
-                                                                                <svg>
-                                                                                    <use xlink:href="/dist/44b104ab2d1b941ead6aba5de843eb17.svg#ic_mode_edit"></use>
-                                                                                </svg>
-                                                                            </div>
-
-
-                                                                        </div>
-                                                                        <div class="d-buttonState">
-                                                                        </div>
-                                                                    </div>
-                                                                </button>
-
-                                                            </div>    </li>
-                                                        <li class="d-participant
-
-                  " data-participant-id="199552085">
-                                                            <div class="d-participantExtrasAvatar">
-                                                                <div class="d-participantAvatar">
-                                                                    <svg>
-                                                                        <use xlink:href="/dist/44b104ab2d1b941ead6aba5de843eb17.svg#ic_account_circle"></use>
-                                                                    </svg>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="d-participantInfo">
-                                                                <div class="d-text">
-                                                                    ádasdáaa
-                                                                </div>
-                                                                <div class="d-detailText">
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="d-participantExtrasEditButton">
-                                                                <button type="button" id="false" class="d-button d-editParticipantButton d-medium d-silentButton">
-                                                                    <div class="d-buttonContainer">
-                                                                        <div class="d-buttonContent">
-                                                                            <div class="d-icon">
-                                                                                <svg>
-                                                                                    <use xlink:href="/dist/44b104ab2d1b941ead6aba5de843eb17.svg#ic_mode_edit"></use>
-                                                                                </svg>
-                                                                            </div>
-
-
-                                                                        </div>
-                                                                        <div class="d-buttonState">
-                                                                        </div>
-                                                                    </div>
-                                                                </button>
-
-                                                            </div>    </li>
-                                                    </ul>                </aside>
+                                                        @foreach($event->users as $user)
+                                                            @include('.temp.user_participant', ['user' => $user])
+                                                        @endforeach
+                                                    </ul>
+                                                </aside>
 
                                                 <ul class="d-options">
-                                                    <li class="d-option
-
-
-
-                " data-cid="c140" data-optionindex="0">
+                                                    @foreach($event->options as $option)
+                                                        <li class="d-option" data-cid="c140" data-optionindex="0">
                                                         <label class="d-headerGroup" for="d-participantPreference-c153-0">
                                                             <div class="d-optionDate">
                                                                 <div class="d-dateGroup">
-                                                                    <div class="d-month">Jul</div>
-                                                                    <div class="d-monthFull">July</div>
-                                                                    <div class="d-date">26</div>
-                                                                    <div class="d-day">Thu</div>
+                                                                    {{$option->content}}
                                                                 </div>
                                                             </div>
                                                             <div class="d-optionDetails">
@@ -217,14 +132,15 @@
                                                                     <button aria-label="1 vote. See participants preferences" aria-haspopup="true" type="button" class="d-button d-countButton d-medium d-silentButton">
                                                                         <div class="d-buttonContainer">
                                                                             <div class="d-buttonContent">
-                                                                                <div class="d-icon">
-                                                                                    <svg>
-                                                                                        <use xlink:href="/dist/44b104ab2d1b941ead6aba5de843eb17.svg#d_check"></use>
-                                                                                    </svg>
-                                                                                </div>
-
                                                                                 <div class="d-textContainer">
-                                                                                    <div class="d-text">1</div>
+                                                                                    <div class="d-text">
+                                                                                        {{count($option->users)}}
+                                                                                        @if(count($users) != 0)
+                                                                                        ({!! number_format((count($option->users) * 100 / count($users)), 2) !!}%)
+                                                                                            @else
+                                                                                            (0%)
+                                                                                        @endif
+                                                                                    </div>
                                                                                 </div>
 
                                                                             </div>
@@ -236,11 +152,6 @@
                                                                     <button aria-label="1 vote. See participants preferences" aria-haspopup="true" type="button" class="d-button d-verboseCountButton d-medium d-silentButton">
                                                                         <div class="d-buttonContainer">
                                                                             <div class="d-buttonContent">
-                                                                                <div class="d-icon">
-                                                                                    <svg>
-                                                                                        <use xlink:href="/dist/44b104ab2d1b941ead6aba5de843eb17.svg#d_check"></use>
-                                                                                    </svg>
-                                                                                </div>
 
                                                                                 <div class="d-textContainer">
                                                                                     <div class="d-text">1 vote</div>
@@ -257,8 +168,8 @@
                                                             <!-- closing state -->
                                                             <div id="" class="d-checkbox d-participantPreference d-noPreference" data-optionindex="0" data-participant-id="c153">
                                                                 <div class="d-checkboxWrapper">
-                                                                    <input aria-label=" " type="checkbox" id="d-participantPreference-c153-0" name="d-participantPreference-c153-0">
-                                                                    <label for="d-participantPreference-c153-0">
+                                                                    <input aria-label=" " type="checkbox" id="d-participantPreference-c153-{{$option->id}}" value="{{$option->id}}" name="d-participantPreference-c153-{{$option->id}}">
+                                                                    <label for="d-participantPreference-c153-{{$option->id}}">
                                                                         <div class="d-checkmarkWrapper">
                                                                             <svg class="d-checkmark" viewBox="0 0 24 24" fill="currentColor">
                                                                                 <defs>
@@ -280,11 +191,8 @@
                                                                                     <rect class="d-background" stroke-alignment="inner" fill="#ffffff" x="0" y="0" width="24" height="24" rx="4" ry="4"></rect>
                                                                                     <path class="d-check" stroke-linecap="round" d="M5,11.3L10.5 17 19 8"></path>
                                                                                 </g>
-
-
                                                                             </svg>
                                                                         </div>
-
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -292,20 +200,21 @@
                                                             <!-- closed state -->
                                                         </label>
                                                         <ul aria-hidden="true" class="d-preferences">
-                                                            <li class=" d-noPreference d-preference" data-participant-id="224514269">
-                                                                <svg>
-                                                                    <use xlink:href="/dist/44b104ab2d1b941ead6aba5de843eb17.svg#d_cross"></use>
-                                                                </svg>
+                                                            @foreach($check_list[$option->id] as $check)
+                                                                @if($check == 1)
+                                                                    <li class=" d-yesPreference d-preference" data-participant-id="199552085">
+                                                                        <i class="fa fa-check" style="color:#87C627;" aria-hidden="true"></i>
+                                                                    </li>
+                                                                @else
+                                                                    <li class=" d-noPreference d-preference" data-participant-id="224514269">
 
-                                                            </li>
-                                                            <li class=" d-yesPreference d-preference" data-participant-id="199552085">
-                                                                <svg>
-                                                                    <use xlink:href="/dist/44b104ab2d1b941ead6aba5de843eb17.svg#d_check"></use>
-                                                                </svg>
-
-                                                            </li>
+                                                                    </li>
+                                                                @endif
+                                                            @endforeach
                                                         </ul>
-                                                    </li>                </ul>
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -319,8 +228,7 @@
                                                 <div class="d-buttonContent">
 
                                                     <div class="d-textContainer">
-                                                        <div class="d-text">Send</div>
-                                                        <div class="d-subtext">Cannot attend</div>
+                                                        <div id="submit" class="d-text">Gửi câu trả lời</div>
                                                     </div>
 
                                                 </div>
@@ -329,7 +237,9 @@
                                             </div>
                                         </button>
                                     </div></div>
-                            </div></section></div>
+                            </div>
+                        </section>
+                    </div>
                     <section id="d-additionalInformationView" class="d-hideView"></section>
                 </div>
             </div>
@@ -340,42 +250,51 @@
 
 @section('after-scripts')
   <script>
-      $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
+      $(document).ready(function () {
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
       });
 
-    $("#pd-vote-button9369622").click(function(){
-        var has_check = false;
 
-        $('#pds-answer9369622 .pds-radiobutton').each(function(index, ele){
+    $("#submit").click(function(){
+        var has_check = false;
+        var optionIds = [];
+
+        $('input[type="checkbox"]').each(function(index, ele){
             if(ele.checked){
                 has_check = true;
 
-                //cập nhật vote cho option
-                let option_id = ele.id;
-
-                $.ajax({
-                    method: 'POST',
-                    url: "/vote",
-                    data: {option_id:option_id},
-                    success: function(result){
-                        console.log(result);
-                    }
-                });
-
-                updateInfo();
+                optionIds.push(ele.value);
             }
         });
+
+        var name = $('.d-inputContainer input').val();
+        var event_id = $('#event_id').val();
 
         if(!has_check){
             alert('Bạn cần phải chọn 1 mục nào đó!');
             return;
         }
 
-        $('#voting').hide();
-        $('#result').show();
+        $.ajax({
+            method: 'POST',
+            url: "/vote",
+            data: {name: name, optionIds:optionIds, event_id:event_id},
+            success: function(result){
+                console.log(result);
+            }
+        });
+
+        updateInfo();
+
+        $('input[type="checkbox"]').each(function(index, ele){
+            ele.checked = false;
+        });
+
+        $('.d-inputContainer input').val('');
     });
 
     var updateInfo = function(){
@@ -384,28 +303,42 @@
         $.ajax({
             method: 'GET',
             url: "/info/"+id,
-            success: function(result){
-                $('.pds-total-votes span').text(result['total']);
-                result['options'].forEach(function(ele){
-                    let box = $('.option_'+ele['id']);
-                    box.find('.pds-feedback-per').html("&nbsp;"+Math.round(ele['vote']*100/result['total'])+"%");
-                    box.find('.pds-feedback-votes').html("&nbsp; ("+ele['vote']+" votes)");
-                    box.find('.pds-answer-feedback-bar').css("width", (ele['vote']*100/result['total'])+"%");
-                });
+            success: async function(result){
+                //sửa tổng danh sách người tham gia
+                $('.d-participantCountHeader b').text(result['users'].length);
+
+                // $('ul.d-participants').html('');
+
+                //sửa danh sách người tham gia
+                // result['users'].forEach(async function(user){
+                //      html = loadBlade1(user.id)
+                //     $('ul.d-participants').append(html);
+                // });
+
+
+                // $('ul.d-participants').html(loadBlade1(1));
+                // result['options'].forEach(function(ele){
+                //     let box = $('.option_'+ele['id']);
+                //     box.find('.pds-feedback-per').html("&nbsp;"+Math.round(ele['vote']*100/result['total'])+"%");
+                //     box.find('.pds-feedback-votes').html("&nbsp; ("+ele['vote']+" votes)");
+                //     box.find('.pds-answer-feedback-bar').css("width", (ele['vote']*100/result['total'])+"%");
+                // });
             }
         });
     };
 
-    // setInterval(updateInfo, 5000);
+    function loadBlade1(id) {
+        $.ajax({
+            method: 'POST',
+            url: "/getBlade1",
+            data: {id: id, },
+            success: function(result){
+                return result;
+            }
+        });
+    };
 
-    $("#pd-show-result").click(function(){
-        $('#voting').hide();
-        $('#result').show();
-    });
+    setInterval(updateInfo, 5000);
 
-    $("#btn_return").click(function(){
-        $('#voting').show();
-        $('#result').hide();
-    });
   </script>
 @endsection

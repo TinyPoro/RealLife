@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Option;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -61,28 +62,92 @@ class EventController extends Controller
     public function show($id){
         $event = Event::with('options')->find($id);
 
-        return view('show1', ['event' => $event]);
+        $options = $event->options;
+
+        $users = $event->users;
+
+        $check_list = [];
+
+        foreach($options as $option){
+            foreach($users as $user){
+                if($this->inCollection($user, $option->users)) $check_list[$option->id][$user->id] = 1;
+                else $check_list[$option->id][$user->id] = 0;
+            }
+        }
+
+        return view('show1', ['event' => $event, 'check_list' => $check_list, 'users' => $users]);
+    }
+
+    public function inCollection($entry, $collection){
+        foreach ($collection as $e){
+            if($e->id == $entry->id) return true;
+        }
+
+        return false;
     }
 
     public function getInfo($id){
         $event = Event::with('options')->find($id);
         $options = $event->options;
 
-        $total = 0;
+        $users = $event->users;
+
+        $check_list = [];
+
         foreach($options as $option){
-            $total += $option->vote;
+            foreach($users as $user){
+                if($this->inCollection($user, $option->users)) $check_list[$option->id][$user->id] = 1;
+                else $check_list[$option->id][$user->id] = 0;
+            }
         }
 
         return [
             'options' => $options,
-            'total' => $total
+            'check_list' => $check_list,
+            'users' => $users
         ];
     }
 
     public function vote(Request $request){
-        $option_id = $request->get('option_id');
-        \DB::table('options')->where('id', $option_id)->increment('vote');
+        try {
+            $optionIds = $request->get('optionIds');
+            $name = $request->get('name');
+            $event_id = $request->get('event_id');
 
-        return 'ok';
+            $suffix = '';
+
+            do {
+                $add_name = $name . ' ' . $suffix;
+
+                $user = \DB::table('users')->where('name', $add_name)->get();
+
+                if ($suffix == '') $suffix = 1;
+                else $suffix++;
+            } while ($user->count() > 0);
+
+            //thêm user
+            $user = new User();
+            $user->name = $add_name;
+            $user->event_id = $event_id;
+            $user->save();
+
+            foreach ($optionIds as $optionId) {
+                \DB::table('option_user')->insert(
+                    ['option_id' => $optionId, 'user_id' => $user->id]
+                );
+            }
+
+            return $add_name;
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function getBlade1(Request $request){
+        $id = $request->get('id');
+
+        $user = User::find($id);
+
+        return view('temp.user_participant', ['user' => $user]);
     }
 }

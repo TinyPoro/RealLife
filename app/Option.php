@@ -10,4 +10,8 @@ class Option extends Model
     {
         return $this->belongsTo('App\Event');
     }
+
+    public function users(){
+        return $this->belongsToMany('App\User');
+    }
 }
