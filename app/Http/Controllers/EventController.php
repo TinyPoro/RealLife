@@ -118,7 +118,7 @@ class EventController extends Controller
 
             $event = Event::find($event_id);
             $now = Carbon::now();
-            if(!$now->gte($event->ended_at)) return "Over";
+            if(!$event->ended_at->gte($now)) return "Over";
 
             $suffix = '';
 
