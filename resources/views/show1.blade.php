@@ -313,8 +313,8 @@
                         "                    <div class=\"d-buttonContainer\">\n" +
                         "                        <div class=\"d-buttonContent\">\n" +
                         "                            <div class=\"d-textContainer\">\n" +
-                        "                                <div class=\"d-text\"> (\n" +
-                        "                                    "+user_length+"\n" +
+                        "                                <div class=\"d-text\"> \n" +
+                        "                                    "+user_length+"\n(" +
                         percent_html+
                         "                                )</div>\n" +
                         "                            </div>\n" +
