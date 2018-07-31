@@ -123,7 +123,7 @@ class EventController extends Controller
             do {
                 $add_name = $name . ' ' . $suffix;
 
-                $user = \DB::table('users')->where('name', $add_name)->get();
+                $user = \DB::table('users')->where('name', $add_name)->where('event_id', $event_id)->get();
 
                 if ($suffix == '') $suffix = 1;
                 else $suffix++;
