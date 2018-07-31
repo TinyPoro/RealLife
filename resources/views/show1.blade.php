@@ -388,7 +388,7 @@
         });
     };
 
-    setInterval(updateInfo, 5000);
+    // setInterval(updateInfo, 5000);
 
   </script>
 @endsection
