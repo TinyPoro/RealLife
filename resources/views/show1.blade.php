@@ -263,6 +263,15 @@
 
                 await $('ul.d-participants').html(user_list_html);
 
+                //danh sách các vote đang được chọn
+                var optionIds = [];
+
+                $('input[type="checkbox"]').each(function(index, ele){
+                    if(ele.checked){
+                        optionIds.push(ele.value);
+                    }
+                });
+
                 //Cập nhật lại thông tin của các option
                 option_info_html = '';
                 result['options'].forEach(async function(option){
@@ -298,6 +307,12 @@
                     var user_length;
                     if(option.users) user_length = option.users.length;
                     else user_length = 0;
+
+                    //lấy html cho option đang chọn
+                    var check_html = '';
+
+                    if(optionIds.indexOf(''+option.id) != -1) check_html = "<input checked aria-label=\" \" type=\"checkbox\" id=\"d-participantPreference-c153-"+option.id+"\" value=\""+option.id+"\" name=\"d-participantPreference-c153-"+option.id+"\">\n";
+                    else check_html = "<input aria-label=\" \" type=\"checkbox\" id=\"d-participantPreference-c153-"+option.id+"\" value=\""+option.id+"\" name=\"d-participantPreference-c153-"+option.id+"\">\n";
 
                     option_info_html += "<li class=\"d-option\" data-cid=\"c140\" data-optionindex=\"0\">\n" +
                         "    <label class=\"d-headerGroup\" for=\"d-participantPreference-c153-0\">\n" +
@@ -344,7 +359,7 @@
                         "        <!-- closing state -->\n" +
                         "        <div id=\"\" class=\"d-checkbox d-participantPreference d-noPreference\" data-optionindex=\"0\" data-participant-id=\"c153\">\n" +
                         "            <div class=\"d-checkboxWrapper\">\n" +
-                        "                <input aria-label=\" \" type=\"checkbox\" id=\"d-participantPreference-c153-"+option.id+"\" value=\""+option.id+"\" name=\"d-participantPreference-c153-"+option.id+"\">\n" +
+                        check_html +
                         "                <label for=\"d-participantPreference-c153-"+option.id+"\">\n" +
                         "                    <div class=\"d-checkmarkWrapper\">\n" +
                         "                        <svg class=\"d-checkmark\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\n" +
@@ -388,7 +403,7 @@
         });
     };
 
-    // setInterval(updateInfo, 5000);
+    setInterval(updateInfo, 5000);
 
   </script>
 @endsection
