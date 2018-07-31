@@ -69,6 +69,8 @@ class EventController extends Controller
         $check_list = [];
 
         foreach($options as $option){
+            $check_list[$option->id] = [];
+
             foreach($users as $user){
                 if($this->inCollection($user, $option->users)) $check_list[$option->id][$user->id] = 1;
                 else $check_list[$option->id][$user->id] = 0;

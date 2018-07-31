@@ -59,6 +59,19 @@
 @section('content')
     <div id="d-participationPage">
         <div class="d-pageContent">
+            <div class="d-headerContentContainer">
+                <section id="d-pollHeaderView" class=""><div class="d-pollHeader">
+
+                        <h1 class="d-pollTitle">{{$event->title}}</h1>
+
+                        <h2 class="d-pollSubTitle">
+                            <span aria-hidden="true">•</span>
+                            <span>({{$event->ended_at}})</span>
+                            <span aria-hidden="true">•</span>
+                        </h2>
+                    </div></section>
+            </div>
+
             <div class="d-mainContentContainer">
                 <div class="d-mainContentInnerContainer">
                     <div class="d-beforeTabs">
@@ -67,10 +80,8 @@
                                 <div class="d-pollDescription d-pollMetadataRow ">
                                     <div>
                                         <div class="d-contentContainer">
-                                            <div class="d-content">{{$event->title}}
-                                                <span>
-                                                    ({{$event->ended_at}})
-                                                </span>
+                                            <div class="d-content">
+                                                {{$event->description}}
                                             </div>
                                             <input type="hidden" value="{{$event->id}}" id="event_id">
                                         </div>
@@ -283,6 +294,11 @@
                         }
                     };
 
+                    //lấy tổng số người vote cho option này
+                    var user_length;
+                    if(option.users) user_length = option.users.length;
+                    else user_length = 0;
+
                     option_info_html += "<li class=\"d-option\" data-cid=\"c140\" data-optionindex=\"0\">\n" +
                         "    <label class=\"d-headerGroup\" for=\"d-participantPreference-c153-0\">\n" +
                         "        <div class=\"d-optionDate\">\n" +
@@ -298,7 +314,7 @@
                         "                        <div class=\"d-buttonContent\">\n" +
                         "                            <div class=\"d-textContainer\">\n" +
                         "                                <div class=\"d-text\"> (\n" +
-                        "                                    "+option.users.length+"\n" +
+                        "                                    "+user_length+"\n" +
                         percent_html+
                         "                                )</div>\n" +
                         "                            </div>\n" +
@@ -371,8 +387,8 @@
             }
         });
     };
-
-    setInterval(updateInfo, 5000);
+updateInfo();
+    // setInterval(updateInfo, 5000);
 
   </script>
 @endsection
