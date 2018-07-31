@@ -114,6 +114,10 @@ class EventController extends Controller
             $name = $request->get('name');
             $event_id = $request->get('event_id');
 
+            $event = Event::find($event_id);
+            $now = Carbon::now();
+            if(!$now->gte($event->ended_at)) return "Over";
+
             $suffix = '';
 
             do {
@@ -141,13 +145,5 @@ class EventController extends Controller
         }catch(\Exception $e){
             return $e->getMessage();
         }
-    }
-
-    public function getBlade1(Request $request){
-        $id = $request->get('id');
-
-        $user = User::find($id);
-
-        return view('temp.user_participant', ['user' => $user]);
     }
 }

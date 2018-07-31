@@ -22,4 +22,3 @@ Route::get('/complete/{id}', 'EventController@complete')->name('event.complete')
 Route::get('/info/{id}', 'EventController@getInfo');
 
 Route::post('/vote', 'EventController@vote');
-Route::post('/getBlade1', 'EventController@getBlade1');
