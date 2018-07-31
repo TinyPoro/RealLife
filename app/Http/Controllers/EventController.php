@@ -116,6 +116,8 @@ class EventController extends Controller
             $name = $request->get('name');
             $event_id = $request->get('event_id');
 
+            if(!$name) return "Error!";
+
             $event = Event::find($event_id);
             $now = Carbon::now();
             if(!$event->ended_at->gte($now)) return "Over";
