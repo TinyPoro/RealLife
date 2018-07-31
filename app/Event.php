@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    protected $dates = ['ended_at', 'published_at', 'created_at', 'updated_at'];
+
     public function getStartAttribute(){
         $startTime = Carbon::parse($this->created_at);
         $now = Carbon::now();
