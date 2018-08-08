@@ -32,8 +32,8 @@ class EventController extends Controller
         $title = $request->get('title');
         $description = $request->get('description');
         $options = $request->get('options');
-        $ended_at = $request->get('ended_at');
-        $started_at = $request->get('started_at');
+        $ended_at = Carbon::createFromTimeString($request->get('ended_at'));
+        $started_at = Carbon::createFromTimeString($request->get('started_at'));
 
         $event = new Event();
         $event->title = $title;
