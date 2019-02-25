@@ -201,9 +201,11 @@
             return;
         }
 
+        let url = '{{route('vote')}}';
+
         $.ajax({
             method: 'POST',
-            url: "/vote",
+            url: url,
             data: {name: name, optionIds:optionIds, event_id:event_id},
             success: function(result){
                 if(result === "Over") alert("Đã hết thời gian sự kiện!");
@@ -224,9 +226,12 @@
     var updateInfo = function(){
         let id = $('#event_id').val();
 
+        let url = '{{route('info', ['id' => ':id'])}}';
+        url = url.replace(':id', id);
+
         $.ajax({
             method: 'GET',
-            url: "/info/"+id,
+            url: url,
             success: async function(result){
                 //sửa tổng danh sách người tham gia
                 $('.d-participantCountHeader b').text(result['users'].length);
