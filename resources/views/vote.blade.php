@@ -73,7 +73,11 @@
                     <label class="pds-feedback-label">
                       <span class="pds-answer-text"> {{$option->content}} </span>
                       <span class="pds-feedback-result">
-                        <span class="pds-feedback-per">&nbsp;{{$option->vote*100/$total_vote}}%</span>
+                          @if($total_vote === 0)
+                              <span class="pds-feedback-per">&nbsp;0%</span>
+                          @else
+                              <span class="pds-feedback-per">&nbsp;{{$option->vote*100/$total_vote}}%</span>
+                          @endif
                         <span class="pds-feedback-votes">&nbsp; ({{$option->vote}} votes)</span>
                       </span>
                     </label>
@@ -81,7 +85,11 @@
                     <span class="pds-clear" style="display: block;clear: both;height:1px;line-height:1px;">&nbsp;</span>
 
                     <div class="pds-answer-feedback" id="PDI_feedback0">
-                      <div class="pds-answer-feedback-bar" style="width:{{$option->vote*100/$total_vote}}%"></div>
+                        @if($total_vote === 0)
+                            <div class="pds-answer-feedback-bar" style="width:0%"></div>
+                        @else
+                            <div class="pds-answer-feedback-bar" style="width:{{$option->vote*100/$total_vote}}%"></div>
+                        @endif
                     </div>
 
                     <span class="pds-clear" style="display: block;clear: both;height:1px;line-height:1px;">&nbsp;</span>
